@@ -16,11 +16,8 @@ class cryptography:
             if in_key > len(self.key)-1:
                 in_key = 0
 
-        enc = ""
-        for pp in li:
-            enc += chr(pp)
-
-        return enc.encode().hex()
+        enc = "".join([format(pp, 'x') for pp in li])
+        return enc
 
     def decrypt(self, string):
         text = string
@@ -36,17 +33,14 @@ class cryptography:
             if in_key > len(self.key)-1:
                 in_key = 0
 
-        enc = ""
-        for pp in li:
-            enc += chr(pp)
-
-        return enc
+        decrypted_text = "".join([chr(pp) for pp in li])
+        return decrypted_text
 
 
 crypto = cryptography()
-crypto.key = [10, 5, 11, 8, 12, 7, 13, 2, 14, 5]
+crypto.key = [17, 5, 14, 5, 1, 17, 24, 32, 12, 11, 11, 8, 7, 8, 5, 3, 18, 20, 25]
 
-encrypt = crypto.encrypt("Secret Message")
+encrypt = crypto.encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=")
 decrypt = crypto.decrypt(encrypt)
 
 print(f"encrypt: {encrypt}")
